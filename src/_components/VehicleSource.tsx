@@ -99,26 +99,38 @@ const VehicleSolutions: React.FC = () => {
     }, [isMobile]);
 
     useEffect(() => {
-        videoRefs.current.forEach((video) => {
-            if (video) {
-                video.currentTime = 0;
-                video.play().catch((e) => console.log("Autoplay prevented:", e));
+        // Play the active video when controls change
+        const playActiveVideo = () => {
+            if (activeTab === 'passenger') {
+                const video = videoRefs.current.get(passengerControls[activePassengerControl].id);
+                if (video) {
+                    video.currentTime = 0;
+                    video.play().catch(e => console.log("Autoplay prevented:", e));
+                }
+            } else {
+                const video = videoRefs.current.get(commercialControls[activeCommercialControl].id + 100); // Adding 100 to avoid ID conflicts
+                if (video) {
+                    video.currentTime = 0;
+                    video.play().catch(e => console.log("Autoplay prevented:", e));
+                }
             }
-        });
+        };
+
+        playActiveVideo();
     }, [activePassengerControl, activeCommercialControl, activeTab]);
 
     const passengerControls: VideoControl[] = [
-        { id: 0, label: 'Complete Body', video: "/static/Passenger Alpha - Trim.mp4" },
-        { id: 1, label: 'Front', video: "/static/Front.mp4" },
-        { id: 2, label: 'Cabin', video: "/static/Cabin.mp4" },
-        { id: 3, label: 'Trunk', video: "/static/Trunk.mp4" },
-        { id: 4, label: 'Exterior', video: "/static/Exterior.mp4" },
+        { id: 0, label: 'Complete Body', video: "/media/Passenger Alpha.bc06b347f5b526ad9a60.mp4" },
+        { id: 1, label: 'Front', video: "/media/Front.8f5fda304d3095ab6b02.mp4" },
+        { id: 2, label: 'Cabin', video: "/media/Cabin.3260d3e4f52b3804dae5.mp4" },
+        { id: 3, label: 'Trunk', video: "/media/Trunk.54bfaa734c0395172c08.mp4" },
+        { id: 4, label: 'Exterior', video: "/media/Exterior.a127ebb308e655c7e32c.mp4" },
     ];
 
     const commercialControls: VideoControl[] = [
-        { id: 0, label: 'Complete Body', video: "/static/CommercialAlpha.mp4" },
-        { id: 1, label: 'Engine', video: "/static/Commercial-Engine.mp4" },
-        { id: 2, label: 'Cabin', video: "/static/Commercial-Cabin.mp4" },
+        { id: 0, label: 'Complete Body', video: "/media/Commercial Alpha.92c92d40f9116c837d1d.mp4" },
+        { id: 1, label: 'Engine', video: "/media/Commercial-Engine.d8957f7c027ca396858e.mp4" },
+        { id: 2, label: 'Cabin', video: "/media/Commercial-Cabin.69adf15a8021267cbe8c.mp4" },
     ];
 
     const BodyIcon = () => <img src={'/static/body.png'} alt='Complete Body icon' className="w-12 h-12" />;
@@ -139,6 +151,7 @@ const VehicleSolutions: React.FC = () => {
             default: return <BodyIcon />;
         }
     };
+
     return (
         <div className="bg-black">
             <div className="relative w-full lg:h-auto">
@@ -173,11 +186,13 @@ const VehicleSolutions: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="relative flex items-center">
+                            <div className="relative flex items-center justify-center">
                                 {activeTab === 'passenger' && (
                                     <div className="self-center mx-auto">
                                         <video
-                                            ref={el => { if (el) videoRefs.current.set(passengerControls[activePassengerControl].id, el); }}
+                                            ref={el => { 
+                                                if (el) videoRefs.current.set(passengerControls[activePassengerControl].id, el); 
+                                            }}
                                             autoPlay
                                             playsInline
                                             loop
@@ -191,16 +206,17 @@ const VehicleSolutions: React.FC = () => {
                                     </div>
                                 )}
                                 {activeTab === 'commercial' && (
-                                    <div className="z-20 w-[580px] xl:w-[750px] 2xl:w-[900px] h-[110%] absolute top-[80vh] left-1/2 -translate-x-1/2 flex items-center justify-center">
+                                    <div className="self-center mx-auto">
                                         <video
-                                            // Store ref using a unique ID for commercial videos (offset to avoid collision with passenger IDs)
-                                            ref={el => { if (el) videoRefs.current.set(commercialControls[activeCommercialControl].id + 100, el); }}
+                                            ref={el => { 
+                                                if (el) videoRefs.current.set(commercialControls[activeCommercialControl].id + 100, el); // Adding 100 to avoid ID conflicts
+                                            }}
                                             autoPlay
                                             playsInline
                                             loop
                                             muted
-                                            className="w-auto max-h-[360px] scale-105 min-h-[230px] 2xl:h-[40vh] h-24"
-                                            key={`commercial-video-${activeCommercialControl}`} // Key change forces re-render if video source truly changes
+                                            className="w-auto max-h-[360px] min-h-[230px] 2xl:h-[40vh] h-24"
+                                            key={`commercial-video-${activeCommercialControl}`}
                                         >
                                             <source src={commercialControls[activeCommercialControl].video} type="video/mp4" />
                                             Your browser does not support the video tag.
@@ -273,7 +289,6 @@ const VehicleSolutions: React.FC = () => {
                                                 <div key={control.id} className="w-full flex-shrink-0 px-2">
                                                     <div className="text-white flex flex-col items-center">
                                                         <video
-                                                            // Store ref using a unique ID for mobile passenger videos
                                                             ref={el => { if (el) videoRefs.current.set(control.id, el); }}
                                                             autoPlay
                                                             loop
@@ -320,7 +335,6 @@ const VehicleSolutions: React.FC = () => {
                                                 <div key={control.id} className="w-full flex-shrink-0 px-2">
                                                     <div className="text-white flex flex-col items-center">
                                                         <video
-                                                            // Store ref using a unique ID for mobile commercial videos
                                                             ref={el => { if (el) videoRefs.current.set(control.id + 100, el); }}
                                                             autoPlay
                                                             loop
