@@ -48,7 +48,7 @@ export default function Header() {
                 {/* Logo Section */}
                 <div className="flex-shrink-0">
                     <img
-                        src="/Layer 1.png"
+                        src="https://supreme-group.vercel.app/static/media/logo.68f5b8493efb88f7cd65756bf67a1f5b.svg"
                         alt="Supreme Group Logo"
                         className="h-10 sm:h-10 w-auto object-contain"
                     />
