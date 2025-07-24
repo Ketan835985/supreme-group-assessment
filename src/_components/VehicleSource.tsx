@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import React, {
-    ChangeEvent,
+  ChangeEvent,
   useCallback,
   useEffect,
   useRef,
@@ -114,7 +114,7 @@ export default function Solutions() {
   const [progress, setProgress] = useState(0)
 
 
-const [isLargeDevice, setIsLargeDevice] = useState<boolean | null>(null);
+  const [isLargeDevice, setIsLargeDevice] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkDevice = () => {
@@ -402,26 +402,24 @@ const [isLargeDevice, setIsLargeDevice] = useState<boolean | null>(null);
     )
   }
 
-const handleTimeUpdate = useCallback(
-  (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const videoElement = e.currentTarget;
-    const { currentTime, duration } = videoElement;
-    const vidProgress = (currentTime / duration) * 100;
-    setProgress(vidProgress);
-  },
-  [setProgress],
-);
+  const handleTimeUpdate = useCallback(
+    (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      const videoElement = e.currentTarget;
+      const { currentTime, duration } = videoElement;
+      const vidProgress = (currentTime / duration) * 100;
+      setProgress(vidProgress);
+    },
+    [setProgress],
+  );
   return (
-    <div className="blade-top-padding blade-bottom-padding bg-black">
+    <div className="blade-top-padding blade-bottom-padding bg-black manrope-600">
       <section
         ref={containerRef}
         className="bg-black blade-top-padding blade-bottom-padding text-white lg:h-screen lg:overflow-hidden"
       >
         <div className="w-container max-w-none flex flex-col h-full justify-between gap-4 2xl:gap-10 w-full">
-          <h2
-            className="animated-heading hidde w-fit mx-auto md:block text-white font-light text-center 
-          blade-top-padding-sm xl:pt-6 z-10"
-          >
+          <h2 className="animated-heading hidden w-fit mx-auto md:block text-white font-light text-center blade-top-padding-sm xl:pt-6 z-10 
+               text-3xl sm:text-4xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
             <span className="sg-translate">
               Evolving the drive with{' '}
               <span className="font-bold">360-degree</span>{' '}
@@ -437,7 +435,7 @@ const handleTimeUpdate = useCallback(
                 type="button"
                 className="card-details-1"
               >
-                <h3 className="sg-translate font-medium text-left pb-2">
+                <h3 className="sg-translate text-3xl font-medium text-left pb-2">
                   Passenger vehicles
                 </h3>
                 <h6 className="sg-translate font-light text-left 2xl:text-lg">
@@ -450,7 +448,7 @@ const handleTimeUpdate = useCallback(
                 type="button"
                 className="card-details-2 opacity-20 mt-14"
               >
-                <h3 className="sg-translate font-medium text-left pb-2">
+                <h3 className="sg-translate  text-3xl font-medium text-left pb-2">
                   Commercial vehicles
                 </h3>
                 <h6 className="sg-translate font-light text-left 2xl:text-lg">
@@ -557,9 +555,9 @@ const handleTimeUpdate = useCallback(
         </div>
 
         {/* Mobile view */}
-        <div className="lg:hidden blade-top-padding-lg mt-2 text-center w-container">
+        {/* <div className="lg:hidden blade-top-padding-lg mt-2 text-center w-container">
           <div>
-            <h4 className="sg-translate text-xl text-blue mb-2 font-semibold">
+            <h4 className="sg-translate  text-blue mb-2 font-semibold">
               Passenger vehicles
             </h4>
             <p className="sg-translate ">
@@ -573,7 +571,7 @@ const handleTimeUpdate = useCallback(
                 clickable: true,
               }}
               speed={600}
-              spaceBetween={20}
+              spaceBetween={1}
               className="cursor-grab my-4"
             >
               {solutions.map((item) => {
@@ -594,8 +592,8 @@ const handleTimeUpdate = useCallback(
           </div>
 
           <div className="blade-top-padding ">
-            <h3 className="sg-translate text-xl mb-2 text-blue font-semibold">
-              Commercial vehicles
+            <h3 className="sg-translate  mb-2 text-blue text-3xl  font-semibold">
+              Commercial vehicless
             </h3>
             <p className="sg-translate ">
               Advancing engineering <br className="md:hidden" /> for heavy-duty
@@ -607,7 +605,7 @@ const handleTimeUpdate = useCallback(
               pagination={{
                 clickable: true,
               }}
-              speed={600}
+              speed={400}
               spaceBetween={20}
               className="cursor-grab my-4 h-full"
               autoHeight
@@ -628,7 +626,80 @@ const handleTimeUpdate = useCallback(
               })}
             </Swiper>
           </div>
+        </div> */}
+        <div className="lg:hidden px-4 py-6 w-full">
+          {/* Passenger Vehicles Section */}
+          <div className="mb-10 text-center">
+            <h4 className="text-blue-600 text-lg font-semibold mb-2">
+              Passenger Vehicles
+            </h4>
+            <p className="text-sm text-gray-700">
+              Revving up innovation <br className="md:hidden" />
+              from interior to exterior.
+            </p>
+
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay, A11y]}
+              direction="horizontal"
+              slidesPerView={1}          // Show only one slide
+              spaceBetween={0}           // No gap
+              pagination={{ clickable: true }}
+              speed={500}                // Smooth transition speed
+              className="my-5"
+              allowSlideNext={true}
+              allowTouchMove={true}
+              allowSlidePrev={true}
+            >
+              {solutions.map((item) => (
+                <SwiperSlide
+                  key={item.id}
+                  className="flex flex-col items-center justify-end pb-12"
+                >
+                  <SolutionCard
+                    title={item.title}
+                    video={item.video}
+                    poster={item.poster}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          {/* Commercial Vehicles Section */}
+          <div className="text-center mt-12">
+            <h4 className="text-blue-600 text-lg font-semibold mb-2">
+              Commercial Vehicles
+            </h4>
+            <p className="text-sm text-gray-700">
+              Advancing engineering <br className="md:hidden" />
+              for heavy-duty vehicles.
+            </p>
+
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay, A11y]}
+              direction="horizontal" // Slide left to right
+              pagination={{ clickable: true }}
+              spaceBetween={16}
+              slidesPerView={1.1}
+              centeredSlides={true}
+              className="my-5"
+            >
+              {commercialSolutions.map((item) => (
+                <SwiperSlide
+                  key={item.id}
+                  className="flex flex-col items-center justify-end pb-12"
+                >
+                  <SolutionCard
+                    title={item.title}
+                    video={item.video}
+                    poster={item.poster}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
+
       </section>
     </div>
   )

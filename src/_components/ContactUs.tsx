@@ -22,7 +22,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-br from-blue-600 to-blue-800 py-16 px-4">
+    <section className="bg-[#006ABC] py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Contact Info */}
