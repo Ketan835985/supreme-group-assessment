@@ -112,9 +112,20 @@ export default function Solutions() {
   const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [progress, setProgress] = useState(0)
-  const [isLargeDevice, setisLargeDevice] = useState(
-    !(window.innerWidth < 1024),
-  )
+
+
+const [isLargeDevice, setIsLargeDevice] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsLargeDevice(window.innerWidth >= 1024);
+    };
+
+    checkDevice(); // initial check
+    window.addEventListener('resize', checkDevice);
+
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeSlide, setActiveSlide] = useState(0)
   const videoRefSlide2 = useRef<HTMLVideoElement>(null)
