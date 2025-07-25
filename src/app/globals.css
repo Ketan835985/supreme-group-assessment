@@ -10,13 +10,15 @@
 }
 
 
-.swiper-container {
+
+/* Ensure Swiper container has proper dimensions */
+.my-horizontal-slider {
   width: 100%;
-  height: 100%;
+  height: 300px; /* Adjust as needed */
 }
 
+/* Swiper slide styling */
 .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: auto !important; /* Let slides size to content */
+  height: 100%;
 }

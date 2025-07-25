@@ -555,78 +555,7 @@ export default function Solutions() {
         </div>
 
         {/* Mobile view */}
-        {/* <div className="lg:hidden blade-top-padding-lg mt-2 text-center w-container">
-          <div>
-            <h4 className="sg-translate  text-blue mb-2 font-semibold">
-              Passenger vehicles
-            </h4>
-            <p className="sg-translate ">
-              Revving up innovation <br className="md:hidden" /> from interior
-              to exterior.
-            </p>
-
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay, A11y]}
-              pagination={{
-                clickable: true,
-              }}
-              speed={600}
-              spaceBetween={1}
-              className="cursor-grab my-4"
-            >
-              {solutions.map((item) => {
-                return (
-                  <SwiperSlide
-                    key={item.id}
-                    className="pb-16 flex flex-col justify-end"
-                  >
-                    <SolutionCard
-                      title={item.title}
-                      video={item.video}
-                      poster={item.poster}
-                    />
-                  </SwiperSlide>
-                )
-              })}
-            </Swiper>
-          </div>
-
-          <div className="blade-top-padding ">
-            <h3 className="sg-translate  mb-2 text-blue text-3xl  font-semibold">
-              Commercial vehicless
-            </h3>
-            <p className="sg-translate ">
-              Advancing engineering <br className="md:hidden" /> for heavy-duty
-              vehicles.
-            </p>
-
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay, A11y]}
-              pagination={{
-                clickable: true,
-              }}
-              speed={400}
-              spaceBetween={20}
-              className="cursor-grab my-4 h-full"
-              autoHeight
-            >
-              {commercialSolutions.map((item) => {
-                return (
-                  <SwiperSlide
-                    key={item.id}
-                    className="pb-16 flex flex-col justify-end self-stretch h-auto"
-                  >
-                    <SolutionCard
-                      title={item.title}
-                      video={item.video}
-                      poster={item.poster}
-                    />
-                  </SwiperSlide>
-                )
-              })}
-            </Swiper>
-          </div>
-        </div> */}
+        
         <div className="lg:hidden px-4 py-6 w-full">
           {/* Passenger Vehicles Section */}
           <div className="mb-10 text-center">
@@ -699,6 +628,8 @@ export default function Solutions() {
             </Swiper>
           </div>
         </div>
+
+        
 
       </section>
     </div>
